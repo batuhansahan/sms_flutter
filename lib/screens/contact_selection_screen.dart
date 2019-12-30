@@ -5,6 +5,7 @@ import 'package:fluttersms/model/custom_contact.dart';
 import 'package:fluttersms/screens/message_screen.dart';
 
 import 'package:contacts_service/contacts_service.dart';
+import 'package:fluttersms/utils/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactSelection extends StatefulWidget {
@@ -12,17 +13,11 @@ class ContactSelection extends StatefulWidget {
   ContactSelection({Key key, this.title}) : super(key: key);
 
   final String title;
-  final String reloadLabel = 'Reload!';
-  final String fireLabel = 'Write a Message';
-  final Color floatingButtonColor = Colors.green;
-  final IconData reloadIcon = Icons.refresh;
-  final IconData fireIcon = Icons.create;
+  final String floatingButtonTitle = 'Write a Message';
 
   @override
   _ContactSelectionState createState() => new _ContactSelectionState(
-        floatingButtonLabel: this.fireLabel,
-        icon: this.fireIcon,
-        floatingButtonColor: this.floatingButtonColor,
+        floatingButtonLabel: this.floatingButtonTitle,
       );
 }
 
@@ -33,13 +28,9 @@ class _ContactSelectionState extends State<ContactSelection> {
   List<CustomContact> _allContacts = List<CustomContact>();
   bool _isLoading = false;
   String floatingButtonLabel;
-  Color floatingButtonColor;
-  IconData icon;
 
   _ContactSelectionState({
-    this.floatingButtonLabel,
-    this.icon,
-    this.floatingButtonColor,
+    this.floatingButtonLabel
   });
 
   @override
@@ -70,10 +61,10 @@ class _ContactSelectionState extends State<ContactSelection> {
               child: CircularProgressIndicator(),
             ),
       floatingActionButton: new FloatingActionButton.extended(
-        backgroundColor: floatingButtonColor,
+        backgroundColor: contactButtonColor,
         onPressed: _onSubmit,
-        icon: Icon(icon),
-        label: Text(floatingButtonLabel),
+        icon: contactButtonIcon,
+        label: Text(floatingButtonLabel,style: floatingButtonLabelTextStyle),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -131,7 +122,7 @@ class _ContactSelectionState extends State<ContactSelection> {
           ? Text(list[0].value)
           : Text(''),
       trailing: Checkbox(
-          activeColor: Colors.green,
+          activeColor: checkboxActiveColor,
           value: c.isChecked,
           onChanged: (bool value) {
             setState(() {

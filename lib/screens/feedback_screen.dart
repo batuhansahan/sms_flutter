@@ -5,35 +5,27 @@ import 'package:fluttersms/screens/contact_selection_screen.dart';
 
 import 'package:contacts_service/contacts_service.dart';
 
+import 'package:fluttersms/utils/constants.dart';
+
 class FeedBackScreen extends StatefulWidget {
   final List<CustomContact> contacts;
   FeedBackScreen({Key key, this.title, @required this.contacts})
       : super(key: key);
 
   final String title;
-  final String reloadLabel = 'Reload!';
-  final String fireLabel = 'Back To Home';
-  final Color floatingButtonColor = Colors.indigo;
-  final IconData floatinButtonIcon = Icons.home;
+  final String floatingButtonTitle = 'Back To Home';
 
   @override
   _FeedBackState createState() => new _FeedBackState(
-        floatingButtonLabel: this.fireLabel,
-        icon: this.floatinButtonIcon,
-        floatingButtonColor: this.floatingButtonColor,
+        floatingButtonLabel: this.floatingButtonTitle
       );
 }
 
 class _FeedBackState extends State<FeedBackScreen> {
   bool _isLoading = false;
   String floatingButtonLabel;
-  Color floatingButtonColor;
-  IconData icon;
-
   _FeedBackState({
     this.floatingButtonLabel,
-    this.icon,
-    this.floatingButtonColor,
   });
 
   @override
@@ -63,10 +55,10 @@ class _FeedBackState extends State<FeedBackScreen> {
               child: CircularProgressIndicator(),
             ),
       floatingActionButton: new FloatingActionButton.extended(
-        backgroundColor: floatingButtonColor,
+        backgroundColor: feedbackButtonColor,
         onPressed: _onSubmit,
-        icon: Icon(icon),
-        label: Text(floatingButtonLabel),
+        icon: feedbackButtonIcon,
+        label: Text(floatingButtonLabel,style: floatingButtonLabelTextStyle),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -87,10 +79,9 @@ class _FeedBackState extends State<FeedBackScreen> {
           ? Text(list[0].value)
           : Text(''),
       trailing: Checkbox(
-          activeColor: Colors.green,
+          activeColor: checkboxActiveColor,
           value: c.isChecked,
-          onChanged: (bool value) {
-          }),
+          onChanged: (bool value) {}),
     );
   }
 }

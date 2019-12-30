@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttersms/model/custom_contact.dart';
 import 'package:fluttersms/screens/feedback_screen.dart';
+import 'package:fluttersms/utils/constants.dart';
 import 'package:sms/sms.dart';
 
 class MessageScreen extends StatefulWidget {
@@ -32,21 +33,18 @@ class _MessageScreenState extends State<MessageScreen> {
       for (var i = 0; i < widget.contacts.length; i++) {
         SmsSender sender = new SmsSender();
         String address = widget.contacts[i].contact.phones.first.value;
-        sender
-            .sendSms(new SmsMessage(address, myController.text))
-            .then((onValue) {
-          print(onValue);
-        });
+        sender.sendSms(new SmsMessage(address, myController.text));
         print("Message sent to:" + address);
       }
       myController.clear();
-        Navigator.push(
+      Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => FeedBackScreen(title:'Messages Sent Successfully', contacts:widget.contacts)
-            ));
-          // }
-          
+              builder: (context) => FeedBackScreen(
+                  title: 'Messages Sent Successfully',
+                  contacts: widget.contacts)));
+      // }
+
       // Navigator.pushAndRemoveUntil(
       //     context,
       //     MaterialPageRoute(
@@ -84,7 +82,7 @@ class _MessageScreenState extends State<MessageScreen> {
       body: Column(
         children: <Widget>[
           Card(
-              color: Colors.white,
+              color: messageTextareaColor,
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
@@ -97,10 +95,13 @@ class _MessageScreenState extends State<MessageScreen> {
         ],
       ),
       floatingActionButton: new FloatingActionButton.extended(
-        backgroundColor: Colors.blue,
+        backgroundColor: messageButtonColor,
         onPressed: sendMessage,
-        icon: Icon(Icons.message),
-        label: Text('Send Message'),
+        icon: messageButtonIcon,
+        label: Text(
+          'Send Message',
+          style: floatingButtonLabelTextStyle,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       // floatingActionButton: FloatingActionButton(

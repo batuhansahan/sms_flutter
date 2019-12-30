@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:fluttersms/screen/message_screen.dart';
 import 'package:fluttersms/screens/contact_selection_screen.dart';
-// import 'package:fluttersms/screen/test_screen.dart';
+import 'package:fluttersms/utils/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,10 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
+      theme: ThemeData(primarySwatch: appbarColor),
       home: ContactSelection(title: 'Select Contacts'),
+      routes: <String, WidgetBuilder>{
+        '/Home': (BuildContext context) => new ContactSelection(),
+      },
     );
   }
 }
