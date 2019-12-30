@@ -36,7 +36,7 @@ class _MessageScreenState extends State<MessageScreen> {
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
                     controller: myController,
-                    maxLines: 8,
+                    maxLines: 10,
                     decoration: InputDecoration.collapsed(
                         hintText: "Enter your message here"),
                   ),
