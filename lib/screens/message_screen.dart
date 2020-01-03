@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttersms/model/custom_contact.dart';
 import 'package:fluttersms/screens/feedback_screen.dart';
 import 'package:fluttersms/utils/constants.dart';
 import 'package:sms/sms.dart';
+
+import 'package:flutter_sms/flutter_sms.dart';
+
+// import 'package:url_launcher/url_launcher.dart';
 
 class MessageScreen extends StatefulWidget {
   final List<CustomContact> contacts;
@@ -28,14 +34,62 @@ class _MessageScreenState extends State<MessageScreen> {
     super.dispose();
   }
 
-  void sendMessage() {
+  void sendMessage() async {
+    // B PLAN
+    List<String> recipients = new List();
     if (myController.text.length > 0) {
       for (var i = 0; i < widget.contacts.length; i++) {
-        SmsSender sender = new SmsSender();
-        String address = widget.contacts[i].contact.phones.first.value;
-        sender.sendSms(new SmsMessage(address, myController.text));
-        print("Message sent to:" + address);
+        if (Platform.isAndroid) {
+          SmsSender sender = new SmsSender();
+          String address = widget.contacts[i].contact.phones.first.value;
+          sender.sendSms(new SmsMessage(address, myController.text));
+          print("Message sent to:" + address);
+        }
+        // B PLAN
+        recipients.add(widget.contacts[i].contact.phones.first.value);
+
+        //   String _result = await FlutterSms
+        //         .sendSMS(message: myController.text, recipients: widget.contacts[i].contact.phones.first.value.toString())
+        //         .catchError((onError) {
+        //       print(onError);
+        //     });
+        // print(_result);
+
+        //   if(Platform.isAndroid){
+        //       //FOR Android
+        //       const url ='sms:+6000000000?body=deneme';
+        //       await launch(url);
+
+        // String _result = await FlutterSms.sendSMS(
+        //         message: myController.text, recipients: recipients)
+        //     .catchError((onError) {
+        //   print(onError);
+        // });
+        // print(_result);
+
+        //   }
+        //   else if(Platform.isIOS){
+        //       //FOR IOS
+        //       const url ='sms:+6000000000&body=message';
+        //       await launch(url);
+        //   }
+
       }
+
+      // B PLAN
+      if (Platform.isIOS) {
+        //       //FOR IOS
+        //       const url ='sms:+6000000000&body=message';
+        //       await launch(url);
+
+        String _result = await FlutterSms.sendSMS(
+                message: myController.text, recipients: recipients)
+            .catchError((onError) {
+          print(onError);
+        });
+        print(_result);
+      }
+
       myController.clear();
       Navigator.push(
           context,
