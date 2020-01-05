@@ -5,7 +5,7 @@ import 'package:fluttersms/model/custom_contact.dart';
 import 'package:fluttersms/screens/message_screen.dart';
 
 import 'package:contacts_service/contacts_service.dart';
-import 'package:fluttersms/utils/constants.dart';
+import 'package:fluttersms/constants.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ContactSelection extends StatefulWidget {

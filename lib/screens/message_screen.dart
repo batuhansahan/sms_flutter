@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttersms/model/custom_contact.dart';
 import 'package:fluttersms/screens/feedback_screen.dart';
-import 'package:fluttersms/utils/constants.dart';
+import 'package:fluttersms/constants.dart';
 import 'package:sms/sms.dart';
 
 import 'package:flutter_sms/flutter_sms.dart';

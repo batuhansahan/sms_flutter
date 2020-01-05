@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttersms/screens/contact_selection_screen.dart';
-import 'package:fluttersms/utils/constants.dart';
+import 'package:fluttersms/constants.dart';
 
 void main() => runApp(MyApp());
 

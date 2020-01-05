@@ -5,7 +5,7 @@ import 'package:fluttersms/screens/contact_selection_screen.dart';
 
 import 'package:contacts_service/contacts_service.dart';
 
-import 'package:fluttersms/utils/constants.dart';
+import 'package:fluttersms/constants.dart';
 
 class FeedBackScreen extends StatefulWidget {
   final List<CustomContact> contacts;
