@@ -26,7 +26,7 @@ dependencies:
   sms_maintained: ^0.2.5
   contacts_service: ^0.3.10
   flutter_sms: ^1.1.0
-  permission_handler: ^4.0.0
+  permission_handler: ^4.1.0
   cupertino_icons: ^0.1.2
 
 
